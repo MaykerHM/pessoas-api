@@ -14,6 +14,18 @@ public class PhysicalPerson extends Person {
     private String name;
 
     @NotNull
-    @Column(length = 11)
     private String cpf;
+
+    public PhysicalPerson(String name, String cpf) {
+        this.name = name;
+        this.cpf = cpf;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
 }
