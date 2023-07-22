@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 @ExtendWith(SpringExtension.class)
@@ -19,5 +20,14 @@ public class JuridicalPersonTest {
         var juridicalPerson = new JuridicalPerson(COMPANY_NAME,VALID_CNPJ);
         assertEquals(juridicalPerson.getCnpj(), VALID_CNPJ);
         assertEquals(juridicalPerson.getCompanyName(), COMPANY_NAME);
+    }
+
+    @Test
+    public void whenCnpjIsNotValid_shouldThrow() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new JuridicalPerson(COMPANY_NAME,INVALID_CNPJ);
+        });
+
+        assertEquals(exception.getMessage(), "Invalid CNPJ: " + INVALID_CNPJ);
     }
 }
