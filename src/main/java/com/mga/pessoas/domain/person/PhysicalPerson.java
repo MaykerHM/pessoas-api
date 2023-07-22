@@ -1,5 +1,6 @@
 package com.mga.pessoas.domain.person;
 
+import com.mga.pessoas.domain.value_objects.Cpf;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -14,11 +15,11 @@ public class PhysicalPerson extends Person {
     private String name;
 
     @NotNull
-    private String cpf;
+    private Cpf cpf;
 
     public PhysicalPerson(String name, String cpf) {
         this.name = name;
-        this.cpf = cpf;
+        this.cpf = new Cpf(cpf);
     }
 
     public String getName() {
@@ -26,6 +27,6 @@ public class PhysicalPerson extends Person {
     }
 
     public String getCpf() {
-        return cpf;
+        return cpf.getCpf();
     }
 }

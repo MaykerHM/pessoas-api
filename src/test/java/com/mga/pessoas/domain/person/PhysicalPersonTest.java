@@ -21,4 +21,13 @@ public class PhysicalPersonTest {
         assertEquals(physicalPerson.getCpf(), VALID_CPF);
         assertEquals(physicalPerson.getName(), NAME);
     }
+
+    @Test
+    public void whenCpfIsNotValid_shouldThrow() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new PhysicalPerson(NAME, INVALID_CPF);
+        });
+
+        assertEquals(exception.getMessage(), "Invalid CPF: " + INVALID_CPF);
+    }
 }
