@@ -1,4 +1,4 @@
-package com.mga.pessoas.domain.Person;
+package com.mga.pessoas.domain.person;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;

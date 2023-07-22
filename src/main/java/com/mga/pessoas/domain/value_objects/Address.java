@@ -1,7 +1,7 @@
-package com.mga.pessoas.domain.address;
+package com.mga.pessoas.domain.value_objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mga.pessoas.domain.Person.Person;
+import com.mga.pessoas.domain.person.Person;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 

@@ -1,6 +1,6 @@
-package com.mga.pessoas.domain.Person;
+package com.mga.pessoas.domain.person;
 
-import com.mga.pessoas.domain.address.Address;
+import com.mga.pessoas.domain.value_objects.Address;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
