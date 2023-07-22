@@ -1,6 +1,5 @@
 package com.mga.pessoas.domain.person;
 
-import com.mga.pessoas.domain.value_objects.Cnpj;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -17,8 +16,7 @@ public class JuridicalPersonTest {
 
     @Test
     public void whenCnpjIsValid_shouldCreateJuridicalPerson() {
-        var validCnpj = new Cnpj(VALID_CNPJ);
-        var juridicalPerson = new JuridicalPerson(COMPANY_NAME,validCnpj);
+        var juridicalPerson = new JuridicalPerson(COMPANY_NAME,VALID_CNPJ);
         assertEquals(juridicalPerson.getCnpj(), VALID_CNPJ);
         assertEquals(juridicalPerson.getCompanyName(), COMPANY_NAME);
     }

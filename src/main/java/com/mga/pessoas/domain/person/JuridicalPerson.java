@@ -17,9 +17,9 @@ public class JuridicalPerson extends Person {
     @NotNull
     private Cnpj cnpj;
 
-    public JuridicalPerson(String companyName, Cnpj cnpj) {
+    public JuridicalPerson(String companyName, String cnpj) {
         this.companyName = companyName;
-        this.cnpj = cnpj;
+        this.cnpj = new Cnpj(cnpj);
     }
 
     public String getCompanyName() {
