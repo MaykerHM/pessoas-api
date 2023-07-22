@@ -23,4 +23,21 @@ public abstract class Person {
 
     @OneToMany(mappedBy="person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Address> addresses;
+
+    public Person(String email, List<Address> addresses) {
+        this.email = email;
+        this.addresses = addresses;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
 }

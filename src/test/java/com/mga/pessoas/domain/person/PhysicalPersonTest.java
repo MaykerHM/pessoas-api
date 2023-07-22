@@ -15,9 +15,11 @@ public class PhysicalPersonTest {
     private final String INVALID_CPF = "22178476006";
     private final String NAME = "fake name";
 
+    private final String VALID_EMAIL = "fake.email@email.com";
+
     @Test
     public void whenCpfIsValid_shouldCreatePhysicalPerson() {
-        var physicalPerson = new PhysicalPerson(NAME, VALID_CPF);
+        var physicalPerson = new PhysicalPerson(NAME, VALID_CPF, VALID_EMAIL, null);
         assertEquals(physicalPerson.getCpf(), VALID_CPF);
         assertEquals(physicalPerson.getName(), NAME);
     }
@@ -25,7 +27,7 @@ public class PhysicalPersonTest {
     @Test
     public void whenCpfIsNotValid_shouldThrow() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new PhysicalPerson(NAME, INVALID_CPF);
+            new PhysicalPerson(NAME, INVALID_CPF, VALID_EMAIL, null);
         });
 
         assertEquals(exception.getMessage(), "Invalid CPF: " + INVALID_CPF);
