@@ -25,4 +25,13 @@ public class PersonTest {
         var juridicalPerson = new JuridicalPerson(COMPANY_NAME,VALID_CNPJ,VALID_EMAIL, null);
         assertEquals(juridicalPerson.getEmail(), VALID_EMAIL);
     }
+
+    @Test
+    public void whenEmailIsNotValid_shouldThrow() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new JuridicalPerson(COMPANY_NAME,VALID_CNPJ, INVALID_EMAIL, null);
+        });
+
+        assertEquals(exception.getMessage(), "Invalid Email: " + INVALID_EMAIL);
+    }
 }
