@@ -5,8 +5,15 @@ import com.mga.pessoas.domain.person.Person;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.UUID;
+
 @Entity(name="address")
 public class Address {
+
+    @Id
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @NotNull
     @Column(length = 50)
@@ -14,7 +21,7 @@ public class Address {
 
     @NotNull
     @Column(length = 10)
-    private final String number;
+    private final Long number;
 
     @Column(length = 100)
     private final String complement;
@@ -37,7 +44,7 @@ public class Address {
     @JoinColumn(name = "person_id")
     private final Person person;
 
-    public Address(String street, String number, String complement, String city, String state, String postalCode, Person person) {
+    public Address(String street, Long number, String complement, String city, String state, String postalCode, Person person) {
         this.street = street;
         this.number = number;
         this.complement = complement;
@@ -47,11 +54,15 @@ public class Address {
         this.person = person;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     public String getStreet() {
         return street;
     }
 
-    public String getNumber() {
+    public Long getNumber() {
         return number;
     }
 
