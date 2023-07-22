@@ -5,41 +5,73 @@ import com.mga.pessoas.domain.Person.Person;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.UUID;
-
+@Entity(name="address")
 public class Address {
-
-    @Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
 
     @NotNull
     @Column(length = 50)
-    private String street;
+    private final String street;
 
     @NotNull
     @Column(length = 10)
-    private String number;
+    private final String number;
 
     @Column(length = 100)
-    private String complement;
+    private final String complement;
 
     @NotNull
     @Column(length = 50)
-    private String city;
+    private final String city;
 
     @NotNull
     @Column(length = 2)
-    private String state;
+    private final String state;
 
     @NotNull
     @Column(length = 8)
-    private String postalCode;
+    private final String postalCode;
 
     @NotNull
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
-    private Person person;
+    private final Person person;
+
+    public Address(String street, String number, String complement, String city, String state, String postalCode, Person person) {
+        this.street = street;
+        this.number = number;
+        this.complement = complement;
+        this.city = city;
+        this.state = state;
+        this.postalCode = postalCode;
+        this.person = person;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
 }

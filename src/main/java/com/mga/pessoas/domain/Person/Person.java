@@ -1,6 +1,5 @@
 package com.mga.pessoas.domain.Person;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mga.pessoas.domain.address.Address;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
+@Entity(name="person")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "personType")
 public abstract class Person {
