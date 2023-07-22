@@ -1,6 +1,7 @@
 package com.mga.pessoas.domain.person;
 
 import com.mga.pessoas.domain.value_objects.Address;
+import com.mga.pessoas.domain.value_objects.Email;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -19,13 +20,13 @@ public abstract class Person {
 
     @NotNull
     @Column(length = 100)
-    private String email;
+    private Email email;
 
     @OneToMany(mappedBy="person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Address> addresses;
 
     public Person(String email, List<Address> addresses) {
-        this.email = email;
+        this.email = new Email(email);
         this.addresses = addresses;
     }
 
@@ -34,7 +35,7 @@ public abstract class Person {
     }
 
     public String getEmail() {
-        return email;
+        return email.getEmail();
     }
 
     public List<Address> getAddresses() {

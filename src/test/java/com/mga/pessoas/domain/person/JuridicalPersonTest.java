@@ -18,8 +18,6 @@ public class JuridicalPersonTest {
 
     private final String VALID_EMAIL = "fake.email@email.com";
 
-    private final String INVALID_EMAIL = "92501222000106";
-
     @Test
     public void whenCnpjIsValid_shouldCreateJuridicalPerson() {
         var juridicalPerson = new JuridicalPerson(COMPANY_NAME,VALID_CNPJ,VALID_EMAIL, null);
