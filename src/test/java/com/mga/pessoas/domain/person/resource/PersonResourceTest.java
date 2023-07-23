@@ -2,6 +2,8 @@ package com.mga.pessoas.domain.person.resource;
 
 import com.mga.pessoas.domain.person.JuridicalPerson;
 import com.mga.pessoas.domain.person.Person;
+import com.mga.pessoas.domain.person.dto.PersonDTO;
+import com.mga.pessoas.domain.person.exception.PersonAlreadyExistsWithDocumentException;
 import com.mga.pessoas.domain.person.service.PersonService;
 import com.mga.pessoas.resource.PersonResource;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -41,5 +44,28 @@ public class PersonResourceTest {
         mockMvc.perform(get("/v1/persons/{id}", 1L)
                         .contentType("application/json"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void createPerson_whenOk_shouldReturn201() throws Exception, PersonAlreadyExistsWithDocumentException {
+        when(personService.create(any(PersonDTO.class))).thenReturn(juridicalPerson);
+        mockMvc.perform(post("/v1/persons")
+                        .contentType("application/json")
+                        .content("{\n" +
+                                "    \"name\": \"Fulano\",\n" +
+                                "    \"document\": \"79498440000\",\n" +
+                                "    \"email\": \"fulano@email.com\",\n" +
+                                "    \"addresses\": [\n" +
+                                "        {\n" +
+                                "            \"street\": \"Rua Rui Barbosa\",\n" +
+                                "            \"number\": \"754\",\n" +
+                                "            \"complement\": \"Casa\"\n" +
+                                "            \"city\": \"Maringá\"\n" +
+                                "            \"state\": \"PR\"\n" +
+                                "            \"postalCode\": \"87020090\"\n" +
+                                "        }\n" +
+                                "    ]\n" +
+                                "}"))
+                .andExpect(status().isCreated());
     }
 }
