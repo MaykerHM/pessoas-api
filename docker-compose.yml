@@ -7,7 +7,6 @@ services:
     container_name: pessoas
     image: pessoas:latest
     environment:
-      POSTGRES_URL:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'postgres'
     ports:
@@ -22,3 +21,6 @@ services:
       - '5432:5432'
     expose:
       - '5432'
+    volumes:
+      - ./src/main/resources/db/changelog/changes/1.0.0.0_create_tables_person_and_address.sql:/docker-entrypoint-initdb.d/1.0.0.0_create_tables_person_and_address.sql
+      - ./src/main/resources/scripts/initial-data-insert.sql:/docker-entrypoint-initdb.d/initial-data-insert.sql

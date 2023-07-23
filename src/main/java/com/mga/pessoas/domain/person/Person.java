@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
-import java.util.UUID;
 
 @Entity(name="person")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -17,7 +16,7 @@ public abstract class Person {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @NotNull
     @Column(length = 100)
@@ -32,7 +31,7 @@ public abstract class Person {
         this.addresses = addresses;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
