@@ -4,7 +4,7 @@ import com.mga.pessoas.domain.value_objects.Cpf;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
-@Converter
+@Converter(autoApply=true)
 public class CpfAttributeConverter implements AttributeConverter<Cpf, String> {
 
     @Override
@@ -14,6 +14,6 @@ public class CpfAttributeConverter implements AttributeConverter<Cpf, String> {
 
     @Override
     public String convertToDatabaseColumn(Cpf attribute) {
-        return attribute == null ? null : attribute.toString();
+        return attribute == null ? null : attribute.getCpf();
     }
 }

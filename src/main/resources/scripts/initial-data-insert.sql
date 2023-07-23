@@ -1,4 +1,4 @@
-INSERT INTO person (id, name, personType, email, document)
+INSERT INTO person (id, name, person_type, email, document)
 VALUES
   ('1', 'Marie-ann Willshee', 'physical', 'mwillshee0@pbs.org', '33416960359'),
   ('2', 'Penny Burgot', 'physical', 'pburgot1@51.la', '78220947749'),

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS person (
     email varchar(100) NOT NULL,
     name varchar(100) NOT NULL,
     document varchar(14) NOT NULL,
-    personType varchar(20) NOT NULL,
+    person_type varchar(20) NOT NULL,
     CONSTRAINT pk_person PRIMARY KEY(id)
 );
 
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS address (
     complement varchar(100),
     city varchar(50) NOT NULL,
     state varchar(2) NOT NULL,
-    postalCode varchar(8) NOT NULL,
+    postal_code varchar(8) NOT NULL,
     person_id bigint NOT NULL,
     CONSTRAINT pk_address PRIMARY KEY(id),
     CONSTRAINT fk_person

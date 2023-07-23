@@ -4,7 +4,7 @@ import com.mga.pessoas.domain.value_objects.Email;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
-@Converter
+@Converter(autoApply=true)
 public class EmailAttributeConverter implements AttributeConverter<Email, String> {
 
     @Override
@@ -14,6 +14,6 @@ public class EmailAttributeConverter implements AttributeConverter<Email, String
 
     @Override
     public String convertToDatabaseColumn(Email attribute) {
-        return attribute == null ? null : attribute.toString();
+        return attribute == null ? null : attribute.getEmail();
     }
 }
