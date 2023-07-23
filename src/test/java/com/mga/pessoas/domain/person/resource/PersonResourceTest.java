@@ -38,7 +38,7 @@ public class PersonResourceTest {
     @Test
     public void getById_whenOk_shouldReturn200() throws Exception {
         when(personService.findById(any(Long.class))).thenReturn(juridicalPerson);
-        mockMvc.perform(get("/api/v1/persons/{id}", 1L)
+        mockMvc.perform(get("/v1/persons/{id}", 1L)
                         .contentType("application/json"))
                 .andExpect(status().isOk());
     }
