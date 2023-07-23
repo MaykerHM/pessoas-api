@@ -21,7 +21,7 @@ public class Address {
 
     @NotNull
     @Column(length = 10)
-    private final Long number;
+    private final String number;
 
     @Column(length = 100)
     private final String complement;
@@ -44,7 +44,7 @@ public class Address {
     @JoinColumn(name = "person_id")
     private final Person person;
 
-    public Address(String street, Long number, String complement, String city, String state, String postalCode, Person person) {
+    public Address(String street, String number, String complement, String city, String state, String postalCode, Person person) {
         this.street = street;
         this.number = number;
         this.complement = complement;
@@ -62,7 +62,7 @@ public class Address {
         return street;
     }
 
-    public Long getNumber() {
+    public String getNumber() {
         return number;
     }
 

@@ -2,7 +2,7 @@
 
 --changeset pessoas:create-tables:1
 CREATE TABLE IF NOT EXISTS person (
-    id uuid NOT NULL,
+    id bigint NOT NULL,
     email varchar(100) NOT NULL,
     name varchar(100) NOT NULL,
     document varchar(14) NOT NULL,
@@ -14,12 +14,12 @@ CREATE TABLE IF NOT EXISTS person (
 CREATE TABLE IF NOT EXISTS address (
     id uuid NOT NULL,
     street varchar(50) NOT NULL,
-    number bigint NOT NULL,
+    number varchar(10) NOT NULL,
     complement varchar(100),
     city varchar(50) NOT NULL,
     state varchar(2) NOT NULL,
     postalCode varchar(8) NOT NULL,
-    person_id uuid NOT NULL,
+    person_id bigint NOT NULL,
     CONSTRAINT pk_address PRIMARY KEY(id),
     CONSTRAINT fk_person
         FOREIGN KEY(person_id)
