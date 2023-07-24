@@ -1,29 +1,21 @@
 package com.mga.pessoas.domain.person.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-
 import java.util.List;
 
-public class PersonDTO {
+public class PersonUpdateDTO {
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String document;
 
-    @NotNull
     private String email;
 
-    @NotNull
     private String personType;
 
-    @NotEmpty
     private List<AddressDTO> addresses;
 
-    public static PersonDTO of(String name, String document, String email, String personType, List<AddressDTO> addresses) {
-        PersonDTO dto = new PersonDTO();
+    public static PersonUpdateDTO of(String name, String document, String email, String personType, List<AddressDTO> addresses) {
+        PersonUpdateDTO dto = new PersonUpdateDTO();
         dto.name = name;
         dto.document = document;
         dto.email = email;

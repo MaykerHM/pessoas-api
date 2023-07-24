@@ -3,6 +3,7 @@ package com.mga.pessoas.domain.person.resource;
 import com.mga.pessoas.domain.person.JuridicalPerson;
 import com.mga.pessoas.domain.person.Person;
 import com.mga.pessoas.domain.person.dto.PersonDTO;
+import com.mga.pessoas.domain.person.dto.PersonUpdateDTO;
 import com.mga.pessoas.domain.person.exception.PersonAlreadyExistsWithDocumentException;
 import com.mga.pessoas.domain.person.service.PersonService;
 import com.mga.pessoas.resource.PersonResource;
@@ -13,11 +14,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -51,22 +52,48 @@ public class PersonResourceTest {
         when(personService.create(any(PersonDTO.class))).thenReturn(juridicalPerson);
         mockMvc.perform(post("/v1/persons")
                         .contentType("application/json")
-                        .content("{\n" +
-                                "    \"name\": \"Fulano\",\n" +
-                                "    \"document\": \"79498440000\",\n" +
-                                "    \"email\": \"fulano@email.com\",\n" +
-                                "    \"personType\": \"physical\",\n" +
-                                "    \"addresses\": [\n" +
-                                "        {\n" +
-                                "            \"street\": \"Rua Rui Barbosa\",\n" +
-                                "            \"number\": \"754\",\n" +
-                                "            \"complement\": \"Casa\"\n" +
-                                "            \"city\": \"Maringá\"\n" +
-                                "            \"state\": \"PR\"\n" +
-                                "            \"postalCode\": \"87020090\"\n" +
-                                "        }\n" +
-                                "    ]\n" +
-                                "}"))
+                        .content("""
+                                {
+                                    "name": "Fulano",
+                                    "document": "79498440000",
+                                    "email": "fulano@email.com",
+                                    "personType": "juridical",
+                                    "addresses": [
+                                        {
+                                            "street": "Rua Rui Barbosa",
+                                            "number": "754",
+                                            "complement": "Casa",
+                                            "city": "Maringá",
+                                            "state": "PR",
+                                            "postalCode": "87020090"
+                                        }
+                                    ]
+                                }"""))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void updatePerson_whenOk_shouldReturn200() throws Exception {
+        when(personService.update(any(PersonUpdateDTO.class), any(Long.class))).thenReturn(juridicalPerson);
+        mockMvc.perform(put("/v1/persons/{id}", 1L)
+                        .contentType("application/json")
+                        .content("""
+                                {
+                                    "name": "Fulano",
+                                    "document": "79498440000",
+                                    "email": "fulano@email.com",
+                                    "personType": "juridical",
+                                    "addresses": [
+                                        {
+                                            "street": "Rua Rui Barbosa",
+                                            "number": "754",
+                                            "complement": "Casa",
+                                            "city": "Maringá",
+                                            "state": "PR",
+                                            "postalCode": "87020090"
+                                        }
+                                    ]
+                                }"""))
+                .andExpect(status().isOk());
     }
 }

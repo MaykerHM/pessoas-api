@@ -1,6 +1,7 @@
 package com.mga.pessoas.domain.person;
 
 import com.mga.pessoas.domain.person.dto.PersonDTO;
+import com.mga.pessoas.domain.person.dto.PersonUpdateDTO;
 import com.mga.pessoas.domain.value_objects.Address;
 import com.mga.pessoas.domain.value_objects.Cpf;
 import com.mga.pessoas.domain.value_objects.Email;
@@ -10,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @DiscriminatorValue("physical")
@@ -39,6 +41,25 @@ public class PhysicalPerson extends Person {
 
     public PhysicalPerson() {
         super();
+    }
+
+    public static PhysicalPerson update(PhysicalPerson person, PersonUpdateDTO personDTO) {
+        if (Objects.nonNull(personDTO.getName())) {
+            person.name = personDTO.getName();
+        }
+        if (Objects.nonNull(personDTO.getDocument())) {
+            person.cpf = new Cpf(personDTO.getDocument());
+        }
+        if (Objects.nonNull(personDTO.getEmail())) {
+            person.email = new Email(personDTO.getEmail());
+        }
+        if (Objects.nonNull(personDTO.getAddresses())) {
+            List<Address> addresses = personDTO.getAddresses().stream().map(addressDTO -> Address.of(addressDTO, person)).toList();
+            person.addresses.clear();
+            person.addresses = addresses;
+        }
+
+        return person;
     }
 
     public String getName() {

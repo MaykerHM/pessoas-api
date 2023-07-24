@@ -4,6 +4,7 @@ import com.mga.pessoas.domain.person.JuridicalPerson;
 import com.mga.pessoas.domain.person.Person;
 import com.mga.pessoas.domain.person.PhysicalPerson;
 import com.mga.pessoas.domain.person.dto.PersonDTO;
+import com.mga.pessoas.domain.person.dto.PersonUpdateDTO;
 import com.mga.pessoas.domain.person.exception.PersonAlreadyExistsWithDocumentException;
 import com.mga.pessoas.domain.person.exception.PersonNotFoundByIdException;
 import com.mga.pessoas.domain.person.repository.PersonRepository;
@@ -41,4 +42,18 @@ public class PersonService {
         }
         return personRepository.save(person);
     }
+
+    @Transactional
+    public Person update(PersonUpdateDTO personDto, Long id) {
+        Person updatedPerson = this.findById(id);
+        if(Objects.equals(personDto.getPersonType(), "physical")) {
+            PhysicalPerson.update((PhysicalPerson) updatedPerson, personDto);
+        }
+        if(Objects.equals(personDto.getPersonType(), "juridical")) {
+            JuridicalPerson.update((JuridicalPerson) updatedPerson, personDto);
+        }
+
+        return personRepository.save(updatedPerson);
+    }
+
 }

@@ -18,32 +18,32 @@ public class Address {
 
     @NotNull
     @Column(length = 50)
-    private final String street;
+    private String street;
 
     @NotNull
     @Column(length = 10)
-    private final String number;
+    private String number;
 
     @Column(length = 100)
-    private final String complement;
+    private String complement;
 
     @NotNull
     @Column(length = 50)
-    private final String city;
+    private String city;
 
     @NotNull
     @Column(length = 2)
-    private final String state;
+    private String state;
 
     @NotNull
     @Column(length = 8)
-    private final String postalCode;
+    private String postalCode;
 
     @NotNull
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
-    private final Person person;
+    private Person person;
 
     public Address(String street, String number, String complement, String city, String state, String postalCode, Person person) {
         this.street = street;
@@ -53,6 +53,8 @@ public class Address {
         this.state = state;
         this.postalCode = postalCode;
         this.person = person;
+    }
+    public Address() {
     }
 
     public static Address of(AddressDTO dto, Person person) {
