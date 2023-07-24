@@ -56,4 +56,10 @@ public class PersonService {
         return personRepository.save(updatedPerson);
     }
 
+    @Transactional
+    public void delete(Long id) {
+        Person person = this.findById(id);
+        personRepository.delete(person);
+    }
+
 }

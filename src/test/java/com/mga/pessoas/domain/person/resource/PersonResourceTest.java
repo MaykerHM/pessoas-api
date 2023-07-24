@@ -14,7 +14,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -94,6 +93,13 @@ public class PersonResourceTest {
                                         }
                                     ]
                                 }"""))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void deletePerson_whenOk_shouldReturn200() throws Exception {
+        when(personService.findById(any(Long.class))).thenReturn(juridicalPerson);
+        mockMvc.perform(delete("/v1/persons/{id}", 1L))
                 .andExpect(status().isOk());
     }
 }
