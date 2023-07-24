@@ -2,6 +2,7 @@ package com.mga.pessoas.domain.value_objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mga.pessoas.domain.person.Person;
+import com.mga.pessoas.domain.person.dto.AddressDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -52,6 +53,10 @@ public class Address {
         this.state = state;
         this.postalCode = postalCode;
         this.person = person;
+    }
+
+    public static Address of(AddressDTO dto, Person person) {
+        return new Address(dto.getStreet(), dto.getNumber(), dto.getComplement(), dto.getCity(), dto.getState(), dto.getPostalCode(), person);
     }
 
     public UUID getId() {

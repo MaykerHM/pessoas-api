@@ -2,10 +2,10 @@
 
 --changeset pessoas:create-tables:1
 CREATE TABLE IF NOT EXISTS person (
-    id bigint NOT NULL,
+    id SERIAL,
     email varchar(100) NOT NULL,
     name varchar(100) NOT NULL,
-    document varchar(14) NOT NULL,
+    document varchar(14) NOT NULL UNIQUE,
     person_type varchar(20) NOT NULL,
     CONSTRAINT pk_person PRIMARY KEY(id)
 );

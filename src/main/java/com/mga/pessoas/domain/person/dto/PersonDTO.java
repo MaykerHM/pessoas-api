@@ -22,7 +22,17 @@ public class PersonDTO {
     private String personType;
 
     @NotEmpty
-    private List<Address> addresses;
+    private List<AddressDTO> addresses;
+
+    public static PersonDTO of(String name, String document, String email, String personType, List<AddressDTO> addresses) {
+        PersonDTO dto = new PersonDTO();
+        dto.name = name;
+        dto.document = document;
+        dto.email = email;
+        dto.personType = personType;
+        dto.addresses = addresses;
+        return dto;
+    }
 
     public String getName() {
         return name;
@@ -40,7 +50,7 @@ public class PersonDTO {
         return personType;
     }
 
-    public List<Address> getAddresses() {
+    public List<AddressDTO> getAddresses() {
         return addresses;
     }
 }

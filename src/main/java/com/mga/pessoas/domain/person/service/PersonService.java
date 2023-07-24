@@ -27,16 +27,17 @@ public class PersonService {
 
     @Transactional
     public Person create(PersonDTO personDto) throws PersonAlreadyExistsWithDocumentException {
-        Boolean alreadyExistsByDocument = personRepository.existsByDocument(personDto.getDocument());
-        if (alreadyExistsByDocument) {
+        Person foundPersonByDocument = personRepository.findByDocument(personDto.getDocument());
+        if (foundPersonByDocument != null) {
             throw new PersonAlreadyExistsWithDocumentException(personDto.getDocument());
         }
         Person person = null;
+
         if(Objects.equals(personDto.getPersonType(), "physical")) {
-            person = new PhysicalPerson(personDto.getName(), personDto.getDocument(), personDto.getEmail(), personDto.getAddresses());
+            person = new PhysicalPerson(personDto);
         }
         if(Objects.equals(personDto.getPersonType(), "juridical")) {
-            person = new JuridicalPerson(personDto.getName(), personDto.getDocument(), personDto.getEmail(), personDto.getAddresses());
+            person = new JuridicalPerson(personDto);
         }
         return personRepository.save(person);
     }

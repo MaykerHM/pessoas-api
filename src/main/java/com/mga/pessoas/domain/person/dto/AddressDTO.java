@@ -1,0 +1,53 @@
+package com.mga.pessoas.domain.person.dto;
+
+
+public class AddressDTO {
+
+    private String street;
+
+    private String number;
+
+    private String complement;
+
+    private String city;
+
+    private String state;
+
+    private String postalCode;
+
+    public static AddressDTO of(String street, String number, String complement, String city, String state, String postalCode) {
+        AddressDTO dto = new AddressDTO();
+        dto.street = street;
+        dto.number = number;
+        dto.complement = complement;
+        dto.city = city;
+        dto.state = state;
+        dto.postalCode = postalCode;
+        return dto;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+}

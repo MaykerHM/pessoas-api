@@ -1,7 +1,9 @@
 package com.mga.pessoas.domain.person;
 
+import com.mga.pessoas.domain.person.dto.PersonDTO;
 import com.mga.pessoas.domain.value_objects.Address;
 import com.mga.pessoas.domain.value_objects.Cnpj;
+import com.mga.pessoas.domain.value_objects.Email;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -25,6 +27,14 @@ public class JuridicalPerson extends Person {
         super(email, addresses);
         this.companyName = companyName;
         this.cnpj = new Cnpj(cnpj);
+    }
+
+    public JuridicalPerson(PersonDTO personDTO) {
+        List<Address> addresses = personDTO.getAddresses().stream().map(addressDTO -> Address.of(addressDTO, this)).toList();
+        this.companyName = personDTO.getName();
+        this.cnpj = new Cnpj(personDTO.getDocument());
+        super.email = new Email(personDTO.getEmail());
+        super.addresses = addresses;
     }
 
     public JuridicalPerson() {

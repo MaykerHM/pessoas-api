@@ -13,16 +13,15 @@ import java.util.List;
 public abstract class Person {
 
     @Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @Column(length = 100)
-    private Email email;
+    protected Email email;
 
     @OneToMany(mappedBy="person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Address> addresses;
+    protected List<Address> addresses;
 
     public Person(String email, List<Address> addresses) {
         this.email = new Email(email);

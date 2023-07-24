@@ -2,6 +2,8 @@ package com.mga.pessoas.domain.person.service;
 
 import com.mga.pessoas.domain.person.JuridicalPerson;
 import com.mga.pessoas.domain.person.Person;
+import com.mga.pessoas.domain.person.dto.PersonDTO;
+import com.mga.pessoas.domain.person.exception.PersonAlreadyExistsWithDocumentException;
 import com.mga.pessoas.domain.person.exception.PersonNotFoundByIdException;
 import com.mga.pessoas.domain.person.repository.PersonRepository;
 import org.junit.jupiter.api.Test;
@@ -35,6 +37,9 @@ public class PersonServiceTest {
 
     Person juridicalPerson = new JuridicalPerson(COMPANY_NAME, VALID_CNPJ, VALID_EMAIL, null);
 
+    @Mock
+    PersonDTO personDTO;
+
 
     @Test
     public void findById_whenOk_shouldReturnPerson() {
@@ -53,6 +58,31 @@ public class PersonServiceTest {
         });
 
         assertEquals(exception.getMessage(), "Person not found with id: 1");
+    }
+
+    @Test
+    public void create_whenOk_shouldCreate() throws PersonAlreadyExistsWithDocumentException {
+        when(personRepository.findByDocument(anyString())).thenReturn(null);
+        when(personDTO.getPersonType()).thenReturn("juridical");
+        when(personDTO.getName()).thenReturn(COMPANY_NAME);
+        when(personDTO.getDocument()).thenReturn(VALID_CNPJ);
+        when(personDTO.getEmail()).thenReturn(VALID_EMAIL);
+
+        personService.create(personDTO);
+
+        verify(personRepository).save(any());
+    }
+
+    @Test
+    public void create_whenAlreadyExistsByDocument_shouldThrow() {
+        when(personRepository.findByDocument(anyString())).thenReturn(juridicalPerson);
+        when(personDTO.getDocument()).thenReturn(VALID_CNPJ);
+
+        PersonAlreadyExistsWithDocumentException exception = assertThrows(PersonAlreadyExistsWithDocumentException.class, () -> {
+            personService.create(personDTO);
+        });
+
+        assertEquals("Person already exists with document: " + VALID_CNPJ, exception.getMessage());
     }
 
 }

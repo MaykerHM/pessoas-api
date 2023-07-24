@@ -55,6 +55,7 @@ public class PersonResourceTest {
                                 "    \"name\": \"Fulano\",\n" +
                                 "    \"document\": \"79498440000\",\n" +
                                 "    \"email\": \"fulano@email.com\",\n" +
+                                "    \"personType\": \"physical\",\n" +
                                 "    \"addresses\": [\n" +
                                 "        {\n" +
                                 "            \"street\": \"Rua Rui Barbosa\",\n" +
