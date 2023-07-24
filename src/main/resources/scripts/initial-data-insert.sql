@@ -999,4 +999,20 @@ VALUES
   ('997', 'Taryn Stiffkins', 'physical', 'tstiffkinsro@comcast.net', '62055350932'),
   ('998', 'Patrizius Chicken', 'physical', 'pchickenrp@barnesandnoble.com', '71118819186'),
   ('999', 'Ahmad Reubens', 'physical', 'areubensrq@webnode.com', '57493647067'),
-  ('1000', 'Case Yapp', 'physical', 'cyapprr@google.com.hk', '75513608390');
+  ('1000', 'Case Yapp', 'physical', 'cyapprr@google.com.hk', '75513608390'),
+  ('1001', 'ciclano_ltda@email.com', 'Ciclano LTDA', '61817744000198', 'juridical'),
+  ('1002', 'beltrano_cia@email.com', 'Beltrano e CIA', '63287545000140', 'juridical'),
+  ('1003', 'fulano@email.com', 'Fulano', '35766310030', 'physical'),
+  ('1004', 'ciclano@email.com', 'Ciclano', '51860057039', 'physical'),
+  ('1005', 'beltrano@email.com', 'Beltrano', '00515123005', 'physical'),
+  ('1006', 'joao@email.com', 'Joao', '37723797028', 'physical'),
+  ('1007', 'jose@email.com', 'Jose', '38928284074', 'physical'),
+  ('1008', 'maria@email.com', 'Maria', '22013665008', 'physical'),
+  ('1009', 'paulo@email.com', 'Paulo', '80705212017', 'physical'),
+  ('1010', 'tiago@email.com', 'Tiago', '02684151024', 'physical'),
+  ('1011', 'antonio@email.com', 'Antonio', '99132697090', 'physical'),
+  ('1012', 'carla@email.com', 'Carla', '03274096067', 'physical'),
+  ('1013', 'josefa@email.com', 'Josefa', '21878647075', 'physical'),
+  ('1014', 'esmeralda@email.com', 'Esmeralda', '11698176023', 'physical'),
+  ('1015', 'empresa_do_fulano@email.com', 'Empresa do Fulano', '92037488000140', 'juridical');
+

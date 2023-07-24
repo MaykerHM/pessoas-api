@@ -6,6 +6,9 @@ import com.mga.pessoas.domain.person.exception.PersonAlreadyExistsWithDocumentEx
 import com.mga.pessoas.domain.person.exception.PersonNotFoundByIdException;
 import com.mga.pessoas.domain.person.service.PersonService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,16 @@ public class PersonResource {
         this.personService = personService;
     }
 
+    @GetMapping
+    public ResponseEntity<Object> getAllPersons(
+            @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable
+    ) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(personService.findAll(pageable));
+        } catch (Exception err) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err.getMessage());
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable(value = "id") Long id) {

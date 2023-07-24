@@ -11,9 +11,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,6 +50,18 @@ public class PersonServiceTest {
     @Mock
     PersonUpdateDTO personUpdateDTO;
 
+    @Mock
+    Pageable pageable;
+
+
+    @Test
+    public void findAll_whenOk_shouldReturnAllPersonsPaginated() {
+        Page<Person> response = new PageImpl<>(List.of(juridicalPerson));
+        when(personRepository.findAll(any(Pageable.class))).thenReturn(response);
+        personService.findAll(pageable);
+
+        verify(personRepository, times(1)).findAll(any(Pageable.class));
+    }
 
     @Test
     public void findById_whenOk_shouldReturnPerson() {
