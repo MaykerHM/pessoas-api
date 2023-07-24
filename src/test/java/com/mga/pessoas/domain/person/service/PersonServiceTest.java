@@ -3,6 +3,7 @@ package com.mga.pessoas.domain.person.service;
 import com.mga.pessoas.domain.person.JuridicalPerson;
 import com.mga.pessoas.domain.person.Person;
 import com.mga.pessoas.domain.person.dto.PersonDTO;
+import com.mga.pessoas.domain.person.dto.PersonUpdateDTO;
 import com.mga.pessoas.domain.person.exception.PersonAlreadyExistsWithDocumentException;
 import com.mga.pessoas.domain.person.exception.PersonNotFoundByIdException;
 import com.mga.pessoas.domain.person.repository.PersonRepository;
@@ -12,7 +13,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,10 +39,13 @@ public class PersonServiceTest {
 
     private final String VALID_EMAIL = "fake.valid@email.com";
 
-    Person juridicalPerson = new JuridicalPerson(COMPANY_NAME, VALID_CNPJ, VALID_EMAIL, null);
+    Person juridicalPerson = new JuridicalPerson(COMPANY_NAME, VALID_CNPJ, VALID_EMAIL, new ArrayList<>());
 
     @Mock
     PersonDTO personDTO;
+
+    @Mock
+    PersonUpdateDTO personUpdateDTO;
 
 
     @Test
@@ -83,6 +90,23 @@ public class PersonServiceTest {
         });
 
         assertEquals("Person already exists with document: " + VALID_CNPJ, exception.getMessage());
+    }
+
+    @Test
+    public void update_whenOk_shouldUpdate() {
+        Person updatedPerson = JuridicalPerson.update((JuridicalPerson) juridicalPerson, personUpdateDTO);
+
+        when(personRepository.findById(any(Long.class))).thenReturn(Optional.of(juridicalPerson));
+        when(personDTO.getPersonType()).thenReturn("juridical");
+        when(personDTO.getName()).thenReturn(COMPANY_NAME);
+        when(personDTO.getDocument()).thenReturn(VALID_CNPJ);
+        when(personDTO.getEmail()).thenReturn(VALID_EMAIL);
+        when(personDTO.getEmail()).thenReturn(VALID_EMAIL);
+        when(personRepository.save(updatedPerson)).thenReturn(updatedPerson);
+        Person response = personService.update(personUpdateDTO, 1L);
+
+        verify(personRepository).save(any());
+        assertEquals(VALID_EMAIL, response.getEmail());
     }
 
 }
