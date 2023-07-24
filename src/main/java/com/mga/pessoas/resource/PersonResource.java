@@ -40,7 +40,7 @@ public class PersonResource {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Busca pessoas física ou jurídica pelo id")
+    @Operation(summary = "Busca pessoa física ou jurídica pelo id")
     public ResponseEntity<Object> getById(@PathVariable(value = "id") Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(personService.findById(id));
