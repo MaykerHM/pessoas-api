@@ -1,15 +1,20 @@
 package com.mga.pessoas.domain.person.dto;
 
+import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 public class PersonUpdateDTO {
-
+    @Size(max = 100)
     private String name;
 
+    @Size(max = 14, min = 11)
     private String document;
 
+    @Size(max = 100)
     private String email;
 
+    @Size(max = 20)
     private String personType;
 
     private List<AddressDTO> addresses;

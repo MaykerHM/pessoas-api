@@ -54,7 +54,7 @@ ____
 
 #### GET /persons?page=1
 
-Example URI:
+Exemplo URI:
 ```
 http://localhost:8080/api/v1/persons
 ```
@@ -63,7 +63,7 @@ http://localhost:8080/api/v1/persons
 
 #### GET /persons/{id}
 
-Example URI:
+Exemplo URI:
 ```
 http://localhost:8080/api/v1/persons/1
 ```
@@ -72,40 +72,56 @@ http://localhost:8080/api/v1/persons/1
 
 #### POST /persons
 
-Example URI:
+Exemplo URI:
 ```
 http://localhost:8080/api/v1/persons
 ```
-Example request body:
+Exemplo request body:
 ```json
 {
-    "name": "Paulo",
-    "document": "39678653044",
-    "birthdate": "2003-04-18",
-    "contacts": [
-        {
-            "name": "Mae",
-            "phoneNumber": "99999955656",
-            "email": "mae@email.com"
-        }
-    ]
+  "name": "Paulo",
+  "document": "39678653044",
+  "email": "paulo@email.com",
+  "personType": "physical",
+  "addresses": [
+    {
+      "street": "Rua Rui Barbosa",
+      "number": "754",
+      "complement": "Casa",
+      "city": "Maringá",
+      "state": "PR",
+      "postalCode": "87020090"
+    }
+  ]
 }
 ```
-
+* pensonType deverá possuir o valor "physical" ou "juridical"
+* document deverá ser CPF ou CNPJ válido
+* email deverá ser válido
 ---
 
 #### PUT /persons/{id}
-Example URI:
+Exemplo URI:
 ```
 http://localhost:8080/api/v1/persons/1
 ```
-Example request body:
+Exemplo request body:
 ```json
 {
-    "id": "808d9973-747b-40c3-ab62-4e8c9297da9c",
-    "name": "Paulo",
-    "document": "234.120.030-34",
-    "birthdate": "2000-10-23"
+  "name": "Paulo",
+  "document": "39678653044",
+  "email": "paulo@email.com",
+  "personType": "physical",
+  "addresses": [
+    {
+      "street": "Rua Rui Barbosa",
+      "number": "754",
+      "complement": "Casa",
+      "city": "Maringá",
+      "state": "PR",
+      "postalCode": "87020090"
+    }
+  ]
 }
 ```
 
@@ -113,7 +129,7 @@ Example request body:
 
 #### DELETE /persons/{id}
 
-Example URI:
+Exemplo URI:
 ```
 http://localhost:8080/api/v1/persons/1
 ```

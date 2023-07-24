@@ -1,5 +1,6 @@
 package com.mga.pessoas.domain.value_objects;
 
+import com.mga.pessoas.domain.value_objects.exception.InvalidCnpjException;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.InputMismatchException;
@@ -18,7 +19,7 @@ public class Cnpj {
 
     public static @NotNull String validate(@NotNull String cnpj) {
         if (!isValid(cnpj)) {
-            throw new IllegalArgumentException("Invalid CNPJ: " + cnpj);
+            throw new InvalidCnpjException(cnpj);
         }
         return cnpj;
     }

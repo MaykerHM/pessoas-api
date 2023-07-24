@@ -2,21 +2,26 @@ package com.mga.pessoas.domain.person.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
 public class PersonDTO {
 
     @NotNull
+    @Size(max = 100)
     private String name;
 
     @NotNull
+    @Size(max = 14, min = 11)
     private String document;
 
     @NotNull
+    @Size(max = 100)
     private String email;
 
     @NotNull
+    @Size(max = 20)
     private String personType;
 
     @NotEmpty

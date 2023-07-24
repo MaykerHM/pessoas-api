@@ -5,6 +5,10 @@ import com.mga.pessoas.domain.person.dto.PersonUpdateDTO;
 import com.mga.pessoas.domain.person.exception.PersonAlreadyExistsWithDocumentException;
 import com.mga.pessoas.domain.person.exception.PersonNotFoundByIdException;
 import com.mga.pessoas.domain.person.service.PersonService;
+import com.mga.pessoas.domain.value_objects.exception.InvalidCnpjException;
+import com.mga.pessoas.domain.value_objects.exception.InvalidCpfException;
+import com.mga.pessoas.domain.value_objects.exception.InvalidEmailException;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -24,6 +28,7 @@ public class PersonResource {
     }
 
     @GetMapping
+    @Operation(summary = "Busca paginada de todas as pessoas físicas e jurídicas")
     public ResponseEntity<Object> getAllPersons(
             @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable
     ) {
@@ -35,6 +40,7 @@ public class PersonResource {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Busca pessoas física ou jurídica pelo id")
     public ResponseEntity<Object> getById(@PathVariable(value = "id") Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(personService.findById(id));
@@ -46,10 +52,11 @@ public class PersonResource {
     }
 
     @PostMapping
+    @Operation(summary = "Cria uma pessoa física ou jurídica")
     public ResponseEntity<Object> createPerson(@RequestBody @Valid PersonDTO personDTO) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(personService.create(personDTO));
-        } catch (PersonAlreadyExistsWithDocumentException err) {
+        } catch (IllegalArgumentException err) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err.getMessage());
         } catch (Exception err) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err.getMessage());
@@ -57,10 +64,11 @@ public class PersonResource {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Atualiza uma pessoa física ou jurídica")
     public ResponseEntity<Object> updatePerson(@PathVariable(value = "id") Long id, @RequestBody @Valid PersonUpdateDTO personUpdateDTO) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(personService.update(personUpdateDTO, id));
-        } catch (PersonNotFoundByIdException err) {
+        } catch (IllegalArgumentException err) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err.getMessage());
         } catch (Exception err) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err.getMessage());
@@ -68,6 +76,7 @@ public class PersonResource {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Exclui um registro de pessoa física ou jurídica")
     public ResponseEntity<Object> deletePerson(@PathVariable(value = "id") Long id) {
         try {
             personService.delete(id);

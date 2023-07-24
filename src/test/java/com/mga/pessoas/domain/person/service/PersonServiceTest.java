@@ -83,7 +83,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void create_whenOk_shouldCreate() throws PersonAlreadyExistsWithDocumentException {
+    public void create_whenOk_shouldCreate() {
         when(personRepository.findByDocument(anyString())).thenReturn(null);
         when(personDTO.getPersonType()).thenReturn("juridical");
         when(personDTO.getName()).thenReturn(COMPANY_NAME);

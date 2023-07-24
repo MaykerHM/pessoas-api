@@ -1,6 +1,7 @@
 package com.mga.pessoas.domain.value_objects;
 
 
+import com.mga.pessoas.domain.value_objects.exception.InvalidEmailException;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.regex.Pattern;
@@ -19,7 +20,7 @@ public class Email {
 
     public static @NotNull String validate(@NotNull String email) {
         if (!isValid(email)) {
-            throw new IllegalArgumentException("Invalid Email: " + email);
+            throw new InvalidEmailException(email);
         }
         return email;
     }

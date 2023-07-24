@@ -1,5 +1,6 @@
 package com.mga.pessoas.domain.value_objects;
 
+import com.mga.pessoas.domain.value_objects.exception.InvalidCpfException;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
@@ -20,7 +21,7 @@ public class Cpf {
 
     public static @NotNull String validate(@NotNull String cpf) {
         if (!isValid(cpf)) {
-            throw new IllegalArgumentException("Invalid CPF: " + cpf);
+            throw new InvalidCpfException(cpf);
         }
         return cpf;
     }
